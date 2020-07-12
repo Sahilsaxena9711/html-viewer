@@ -1,26 +1,31 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+class App extends React.Component {
+  state = {
+    html: ""
+  }
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  onHtmlChange = e => {
+    this.setState({
+      html: e.target.value
+    });
+  }
+
+  render() {
+    return (
+      <div className="container">
+        <h3 className="title">HTML Viewer</h3>
+        <div className="wrapper">
+          <div className="editorContainer">
+            <textarea rows={"30"} onChange={this.onHtmlChange} className="editor" />
+          </div>
+          <div className="viewer">
+            <div dangerouslySetInnerHTML={{ __html: this.state.html }} />
+          </div>
+        </div>
+      </div>
+    );
+  }
 }
 
 export default App;
